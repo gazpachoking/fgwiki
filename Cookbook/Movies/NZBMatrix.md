@@ -1,11 +1,11 @@
-== Download movies from NZBMatrix using IMDB filtering and SABnzbd over Usenet ==
+## Download movies from NZBMatrix using IMDB filtering and SABnzbd over Usenet
 
 ----
 
-=== Input: NZBMatrix RSS Feed ===
-This starts with an RSS feed from [http://nzbmatrix.com NZBMatrix], which requires a VIP account with them. In this case, I am pulling all english HD x264 encoded movies. You can create your own [http://rss.nzbmatrix.com/ personalized RSS feed] for other categories as well. 
+### Input: NZBMatrix RSS Feed
+This starts with an RSS feed from [[NZBMatrix], which requires a VIP account with them. In this case, I am pulling all english HD x264 encoded movies. You can create your own [http://rss.nzbmatrix.com/ personalized RSS feed|http://nzbmatrix.com]] for other categories as well. 
 
-=== Filters ===
+### Filters
 [[Plugins/content_size|content_size]]: is probably not needed, but can be used to reject movies with file size that are obviously too big or small (# is in MB). 
 
 [[Plugins/quality|quality]]: allows controls what quality of movie you want. Here I indicate 720p.
@@ -20,35 +20,35 @@ This starts with an RSS feed from [http://nzbmatrix.com NZBMatrix], which requir
 
 [[Plugins/seen_movies|seen_movies]]: rejects movies that have already been downloaded but might be from a different group/release
 
-=== Download: SABnzbd ===
-Finally any movies that make it through all filtering is then downloaded with [http://sabnzbd.org/ SABnzbd].
+### Download: SABnzbd
+Finally any movies that make it through all filtering is then downloaded with [[SABnzbd|http://sabnzbd.org/]].
 
-[[Plugins/sabnzbd|SABnzbd plugin]] requires key and url whereas the category field is optional. 
+[[plugin]|[Plugins/sabnzbd|SABnzbd]] requires key and url whereas the category field is optional. 
 
 
-=== config.yml ===
+### config.yml
 
-{{{
-feeds:
-  nzbmatrix:
-    rss: http://rss.nzbmatrix.com/rss.php?page=download&username=<username>&apikey=<your ip key>&subcat=42&english=1&ssl=1
-    content_size: 
-      max: 12000
-      min: 1000
-    quality: 720p
-    imdb:
-      min_score: 6.1
-      min_votes: 4000
-      min_year: 2009
-      reject_genres:
-        - musical
-    imdb_required: yes
-    exists_movie: K:\Movies
-    imdb_rated: http://www.imdb.com/mymovies/list?l=XXXXXXX
-    seen_movies: strict
-    sabnzbd:
-      key: <your sabnzbd api key>
-      url: http://<your ip>/sabnzbd/api?
-      category: movies
 
-}}}
+    feeds:
+      nzbmatrix:
+        rss: http://rss.nzbmatrix.com/rss.php?page=download&username=<username>&apikey=<your ip key>&subcat=42&english=1&ssl=1
+        content_size: 
+          max: 12000
+          min: 1000
+        quality: 720p
+        imdb:
+          min_score: 6.1
+          min_votes: 4000
+          min_year: 2009
+          reject_genres:
+            - musical
+        imdb_required: yes
+        exists_movie: K:\Movies
+        imdb_rated: http://www.imdb.com/mymovies/list?l=XXXXXXX
+        seen_movies: strict
+        sabnzbd:
+          key: <your sabnzbd api key>
+          url: http://<your ip>/sabnzbd/api?
+          category: movies
+    
+
