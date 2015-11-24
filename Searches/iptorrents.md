@@ -1,14 +1,14 @@
-= IPTorrents =
+# IPTorrents
 This search plugin will get results from [http://iptorrents.com]
 
-== Configuration ==
+## Configuration
 Configuration requires rss_key, uid, and pass (uid and pass are found in the cookies):
-{{{
-iptorrents: 
-  rss_key: xxxxxxxxxxxxxxxxxxxx
-  uid: xxxxx
-  password: xxxxxxxxx
-}}}
+
+    iptorrents: 
+      rss_key: xxxxxxxxxxxxxxxxxxxx
+      uid: xxxxx
+      password: xxxxxxxxx
+
 If you would like to define a custom category, you can use the following option:
  category::
  Can be one of the following: \\
@@ -18,12 +18,12 @@ If you would like to define a custom category, you can use the following option:
  You can also specify the category number directly from iptorrents if it is not listed above. \\
  
 Example:
-{{{
-iptorrents: 
-  rss_key: xxxxxxxxxxxxxxxxxxxx
-  uid: xxxxxx
-  password: xxxxxx
-  category: 
-    - Movie-HD-Bluray
-    - Movie-MP4
-}}}
+
+    iptorrents: 
+      rss_key: xxxxxxxxxxxxxxxxxxxx
+      uid: xxxxxx
+      password: xxxxxx
+      category: 
+        - Movie-HD-Bluray
+        - Movie-MP4
+
