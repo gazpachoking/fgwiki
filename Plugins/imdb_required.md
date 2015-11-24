@@ -1,9 +1,9 @@
-= Imdb required =
+# Imdb required
 
 Reject non imdb compatible entries.
 
-=== Example ===
+### Example
 
-{{{
-imdb_required: yes
-}}}
+
+    imdb_required: yes
+
