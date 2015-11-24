@@ -1,44 +1,44 @@
-== Archive ==
+## Archive
 
 The archive plugin will keep a history of all entries from a given task, whether they have been accepted or not. This archive can then later be searched, and entries injected into a task again.
 
 
 Simply enable without any tagging.
 
-{{{
-archive: yes
-}}}
+
+    archive: yes
+
 
 With tagging:
 
-{{{
-archive: [torrent, tv]
-}}}
+
+    archive: [[tv|torrent,]]
+
 
 Search:
 
-{{{
-archive search [@TAG] [@TAG] KEYWORD
-}}}
+
+    archive search [[[@TAG|@TAG]]] KEYWORD
+
 
 Note: if keyword has spaces it must be quoted.
 
 Retrieve (inject into task):
 
-{{{
-archive inject ID [FORCE]
-}}}
 
-== Urlrewriter ==
+    archive inject ID [FORCE]
 
-{{{
-flexget_archive: yes
-}}}
+
+## Urlrewriter
+
+
+    flexget_archive: yes
+
 
 or
 
-{{{
-flexget_archive: [tag, tag]
-}}}
 
-This works with [wiki:Plugins/discover discover] and also with urlrewriting but has less use in there.
+    flexget_archive: [[tag|tag,]]
+
+
+This works with [[discover|Plugins/discover]] and also with urlrewriting but has less use in there.
