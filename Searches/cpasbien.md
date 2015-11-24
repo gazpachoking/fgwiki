@@ -1,19 +1,19 @@
-= WARNING =
+# WARNING
 
 As cpasbien switched to cloudflare, I had to modify the code.
 So now, you have to have https://github.com/Anorov/cloudflare-scrape and all it's dependency to make it work.
 Also, the file cfscrape.py must be put in the folder : /var/lib/flexget
 
-= CPASBIEN Search plugin =
+# CPASBIEN Search plugin
 This search plugin will get results from [http://www.cpasbien.pw/]
 
-== Configuration ==
+## Configuration
 Configuration requires only the category and you can only have ONE:
-{{{
-cpasbien: <category>
-}}}
 
-||'''Category'''||'''Description'''||
+    cpasbien: <category>
+
+
+||**Category*'||'*Description**||
 ||all||Not filtered by any category||
 ||misc||Category for miscellaneous files||
 ||films||Main category for movies & other videos||
@@ -30,18 +30,18 @@ cpasbien: <category>
 ||musique||Category for music||
 
 Example with discover:
-{{{
-tv_search_cpasbien:
-  discover:
-    what:
-      - trakt_list:
-          username: xxxxxxx
-          list: watchlist
-          type: shows
-    from:
-      - cpasbien:
-          category: series-vostfr
-    interval: 1 day
-    ignore_estimations: yes
-}}}
+
+    tv_search_cpasbien:
+      discover:
+        what:
+          - trakt_list:
+              username: xxxxxxx
+              list: watchlist
+              type: shows
+        from:
+          - cpasbien:
+              category: series-vostfr
+        interval: 1 day
+        ignore_estimations: yes
+
 
