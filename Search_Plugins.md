@@ -1,4 +1,4 @@
 
-== Search Plugins ==
+## Search Plugins
 
 Refer to [wiki:Searches].
