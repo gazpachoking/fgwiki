@@ -1,1 +1,1 @@
-= Page for pictures used in the Wiki =
+# Page for pictures used in the Wiki
