@@ -1,1 +1,1 @@
-[[Include(wiki:InstallWizard/Partial/Crontab)]]
+[[Include(wiki:[[InstallWizard]]/Partial/Crontab)]]
