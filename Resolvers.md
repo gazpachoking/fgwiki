@@ -1,4 +1,4 @@
-= Oops, page moved =
+# Oops, page moved
 
 See [wiki:URLRewriters]
 
