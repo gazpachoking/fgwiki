@@ -1,22 +1,21 @@
 
-== ftp_list ==
+## ftp_list
 Generate entries from a remote FTP server
+**Configuration:**
 
-'''Configuration:'''
-{{{
-ftp_list:
-  config:
-    name: <ftp name>
-    username: <username>
-    password: <password>
-    host: <host to connect>
-    port: <port>
-    [files-only: <no/yes]
-    [recursive: <no/yes]
-    [use-ssl: <no/yes>]
-    [encoding: <auto/utf8/ascii>]
-  dirs:
-    - <directory 1>
-    - <directory 2>
-    - ....
-}}}
+    ftp_list:
+      config:
+        name: <ftp name>
+        username: <username>
+        password: <password>
+        host: <host to connect>
+        port: <port>
+        [[<no/yes|files-only:]]
+        [[<no/yes|recursive:]]
+        [[<no/yes>|use-ssl:]]
+        [[<auto/utf8/ascii>|encoding:]]
+      dirs:
+        - <directory 1>
+        - <directory 2>
+        - ....
+
