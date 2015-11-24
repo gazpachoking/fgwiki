@@ -1,5 +1,5 @@
-[[Include(wiki:InstallWizard/Partial/Crontab)]]
+[[Include(wiki:[[InstallWizard]]/Partial/Crontab)]]
 
-= Completed! =
+# Completed!
 
 Sit back and relax.
