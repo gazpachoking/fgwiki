@@ -1,35 +1,33 @@
-= Trakt.tv Series Lookup =
+# Trakt.tv Series Lookup
 **//Updated as of November 11th 2015. This plugin uses the new Trakt v2 API.//**
+**`IMPORTANT:` Please see [[trakt|Plugins/trakt]] on how to authorize Flexget to access your private Trakt.tv account.**
 
-'''{{{IMPORTANT:}}} Please see [wiki:Plugins/trakt trakt] on how to authorize Flexget to access your private Trakt.tv account.'''
+This plugin returns series information from Trakt.tv. The name of the series usually has to be VERY close to what's shown on Trakt.(XXX macro: "BR")
+If you are having problems returning the correct information for a show. Please add to the series the tvdb_id using the [[set|Plugins/set]] command.(XXX macro: "BR")
+**Config schema**
 
-This plugin returns series information from Trakt.tv. The name of the series usually has to be VERY close to what's shown on Trakt.[[BR]]
-If you are having problems returning the correct information for a show. Please add to the series the tvdb_id using the [wiki:Plugins/set set] command.[[BR]]
+    trakt_lookup: yes
 
-'''Config schema'''
-{{{
-trakt_lookup: yes
-}}}
 or
-{{{
-trakt_lookup:
-   account: <flexget account name>
-   username: <trakt username>
-}}}
-`account` is required if your profile is private (see [wiki:Plugins/trakt trakt] on how to authenticate). `username` is the user for which you wish to lookup specific information such as collection or watched history.
+
+    trakt_lookup:
+       account: <flexget account name>
+       username: <trakt username>
+
+`account` is required if your profile is private (see [[trakt|Plugins/trakt]] on how to authenticate). `username` is the user for which you wish to lookup specific information such as collection or watched history.
 
 ----
 
-{{{
-series:
-  - some_series:
-      set:
-        tvdb_id: <tvdb_id>
-}}}
 
-This plugin populates fields on entries that have been identified as series by !Flexget. They may also be used in other plugins "ex:[wiki:Plugins/make_rss make_rss]"
+    series:
+      - some_series:
+          set:
+            tvdb_id: <tvdb_id>
+
+
+This plugin populates fields on entries that have been identified as series by !Flexget. They may also be used in other plugins "ex:[[make_rss|Plugins/make_rss]]"
 ----
-'''Series Metainfo'''
+**Series Metainfo**
 
 ||trakt_series_name||Series name provided by trakt||
 ||trakt_series_year||Series release year||
@@ -54,7 +52,7 @@ This plugin populates fields on entries that have been identified as series by !
 ||trakt_series_episodes||List of episode titles||
 ||trakt_series_actors||Series actors||
 ----
-'''Episode Metainfo'''
+**Episode Metainfo**
 
 ||trakt_ep_name||Episode name||
 ||trakt_ep_tvdb_id||TVDB ID of episode||
@@ -65,12 +63,12 @@ This plugin populates fields on entries that have been identified as series by !
 ||trakt_ep_overview||Episode overview||
 ||trakt_season||Episode season||
 ||trakt_episode||Episode Number||
-||trakt_ep_id||Episode id string 'S01E01'||
+||trakt_ep_id||Episode id string '[[S01E01]]'||
 ||trakt_ep_abs_number||Episode absolute number||
 ||trakt_watched||`True` if watched on `username`'s profile||
 ||trakt_collected||`True` if collected on `username`'s profile||
 ----
-'''Movie Metainfo'''
+**Movie Metainfo**
 
 ||movie_name||Movie name||
 ||movie_year||Production year||
@@ -92,25 +90,24 @@ This plugin populates fields on entries that have been identified as series by !
 ||trakt_watched||`True` if watched on `username`'s profile||
 ||trakt_collected||`True` if collected on `username`'s profile||
 ----
-'''trakt_watched and trakt_collected'''[[BR]]
+**trakt_watched and trakt_collected**(XXX macro: "BR")
 
 If you specify an `account`/`username` in your config, two more fields are enabled `trakt_watched` and `trakt_collected`. These fields are set to `True` if the episode or movie entry has been marked as watched or collected respectively on the Trakt.tv account associated with `username`.
 
 Example config to reject entries that have been marked as watched:
 
-{{{
-some_task:
-  trakt_lookup:
-    username: my_trakt_tv_username
-  if:
-   - trakt_watched: reject
-}}}
 
-'''Example'''[[BR]]
+    some_task:
+      trakt_lookup:
+        username: my_trakt_tv_username
+      if:
+       - trakt_watched: reject
 
-The most common uses we'll see are using it for [wiki:Plugins/make_rss make_rss] and making pretty filenames using [wiki:Plugins/set set] to set {{{content_filename}}} in the [wiki:Plugins/deluge deluge]. The 'default' jinja filter is used to insert 'Unknown' if trakt_lookup failes to get an entry field.
-{{{
-trakt_lookup: yes
-set:
-  content_filename: "{{series_name}} - {{series_id}} - {{trakt_ep_name|default('Unknown')}}"
-}}}
+**Example**(XXX macro: "BR")
+
+The most common uses we'll see are using it for [[make_rss] and making pretty filenames using [wiki:Plugins/set set] to set `content_filename` in the [wiki:Plugins/deluge deluge|Plugins/make_rss]]. The 'default' jinja filter is used to insert 'Unknown' if trakt_lookup failes to get an entry field.
+
+    trakt_lookup: yes
+    set:
+      content_filename: "{{series_name}} - {{series_id}} - {{trakt_ep_name|default('Unknown')}}"
+
