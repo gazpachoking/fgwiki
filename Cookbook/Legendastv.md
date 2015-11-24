@@ -1,4 +1,4 @@
-= Configuration =
+# Configuration
 
 First, you need to create a different yaml configuration for
 this. This is necessary because the series might be duplicate from the
@@ -6,47 +6,47 @@ series torrents download. We will call it 'subs-config.yml'.
 
 This is the content of my subs-config.yml
 
-{{{
-feeds:
-  series-subs:
-    text:
-      url: http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=legendas
-      entry:
-        title: <title>legendas. Legenda ([^ ]*).*
-        url: (http\://t.co/[^<]*)</title>
-    manipulate:
-      - title:
-          replace:
-            regexp: '[\.-]'
-            format: ' '
-    series:
-      - south park
-      - house
-      - how i met your mother
-      - family guy
-      - the big bang theory
-      - crime scene investigation
-      - csi
-      - futurama
-      - burn notice
-      - the cleveland show
-    download:
-      path: /home/torrents/.flexget/subs-temp
-      fail_html: no
-    exec: 
-      auto_escape: yes
-      fail_entries: yes
-      on_output:
-        for_accepted: /home/torrents/.flexget/download-sub.sh {{url}}
-    email:
-      from: email-from@host
-      to: email-to@host
-      smtp_host: smtp.gmail.com
-      smtp_port: 587
-      smtp_username: username
-      smtp_password: password
-      smtp_tls: yes
-}}}
+
+    feeds:
+      series-subs:
+        text:
+          url: http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=legendas
+          entry:
+            title: <title>legendas. Legenda ([^ ]*).*
+            url: (http\://t.co/[^<]*)</title>
+        manipulate:
+          - title:
+              replace:
+                regexp: '[\.-]'
+                format: ' '
+        series:
+          - south park
+          - house
+          - how i met your mother
+          - family guy
+          - the big bang theory
+          - crime scene investigation
+          - csi
+          - futurama
+          - burn notice
+          - the cleveland show
+        download:
+          path: /home/torrents/.flexget/subs-temp
+          fail_html: no
+        exec: 
+          auto_escape: yes
+          fail_entries: yes
+          on_output:
+            for_accepted: /home/torrents/.flexget/download-sub.sh {{url}}
+        email:
+          from: email-from@host
+          to: email-to@host
+          smtp_host: smtp.gmail.com
+          smtp_port: 587
+          smtp_username: username
+          smtp_password: password
+          smtp_tls: yes
+
 
 What we do here is that we download the rss from legendastv twitter
 and separate the entries regexp'ing their titles and the description
@@ -70,8 +70,7 @@ Mine download-sub.sh uses wget and other Linux utilities to download,
 so you may have a hard time using it under Windows, though cygwin
 might help you there. Here it is download-sub.sh:
 
-{{{
-#!/bin/bash
+```/bin/bash
 
 echo Logging in
 
@@ -127,7 +126,7 @@ if [ "$?" -ne "0" ]; then
 fi
 
 exit 0
-}}}
+```
 
 
 Which downloads the subtitle and moves it to
