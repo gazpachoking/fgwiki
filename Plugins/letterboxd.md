@@ -1,8 +1,8 @@
-= Letterboxd =
+# Letterboxd
 
-This plugin produces an [wiki:Entry entry] for each film in any public [http://letterboxd.com Letterboxd] list. These entries can then be added to the [wiki:movie_queue#AddingRemovingusingTasks movie_queue], used to initiate a search with [wiki:discover discover], or passed to some other [wiki:Plugins#Outputs output plugin]. Results are cached for two hours to avoid flooding the site.
+This plugin produces an [[entry] for each film in any public [http://letterboxd.com Letterboxd] list. These entries can then be added to the [wiki:movie_queue#[[AddingRemovingusingTasks]] movie_queue], used to initiate a search with [wiki:discover discover], or passed to some other [wiki:Plugins#Outputs output plugin|Entry]]. Results are cached for two hours to avoid flooding the site.
  
-== Configuration ==
+## Configuration
 
 ||=**Paramaters**    =||==||=An asterisk (*) indicates that the parameter is required =||
 ||**username***       ||  ||Your or another user's Letterboxd username. ||
@@ -25,68 +25,68 @@ The **username** and **list** parameters should be entered exactly as they appea
   `http://letterboxd.com/some-user/list/some-users-list/`
 the username would be `some-user` (not `Some User`), and the list would `some-users-list` (not `Some User's list`).
 
-== Usage notes ==
+## Usage notes
 
 The plugin can easily be used to queue up films from your Letterboxd watchlist to be downloaded by another task:
 
-{{{
-tasks:
-  queue-letterboxd-watchlist:
-    letterboxd:
-      username: *****
-      list: watchlist
-    accept_all: yes
-    movie_queue: add
-}}}
 
-In addition to `title`, `url`, `imdb_id`, `tmdb_id`, `movie_name` and `movie_year`, [wiki:Entry entries] created by the plugin are populated with a few site-specific fields:
+    tasks:
+      queue-letterboxd-watchlist:
+        letterboxd:
+          username: *****
+          list: watchlist
+        accept_all: yes
+        movie_queue: add
+
+
+In addition to `title`, `url`, `imdb_id`, `tmdb_id`, `movie_name` and `movie_year`, [[entries|Entry]] created by the plugin are populated with a few site-specific fields:
 
 ||||||=**Entry fields** =||
 ||**letterboxd_list**   || ||The list that the entry was pulled from, in the format `list (username)`. ||
 ||**letterboxd_score**  || ||The average rating (out of 10) given to the film by Letterboxd users (included when available). ||
 ||**letterboxd_uscore** || ||The rating (out of 10) given to the film by the list owner (included for `diary` and `rated` lists). ||
 
-You can of course [wiki:Plugins#Filters filter] against any of these fields. `letterboxd_list` may be useful where more than one input plugin (or [wiki:inputs more than one Letterboxd list]) is included in the task. `letterboxd_score` and `letterboxd_uscore` can used in conjunction with [wiki:if Python if statements], like so:
+You can of course [[filter] against any of these fields. `letterboxd_list` may be useful where more than one input plugin (or [wiki:inputs more than one Letterboxd list]) is included in the task. `letterboxd_score` and `letterboxd_uscore` can used in conjunction with [wiki:if Python if statements|Plugins#Filters]], like so:
 
-{{{
-tasks:
-  queue-well-reviewed-films:
-    letterboxd:
-      username: *****
-      list: diary
-    if:
-      - 'letterboxd_uscore >= 8': accept
-    movie_queue: add
-}}}
 
-When dealing with large lists, it may be worthwhile to feed entries to an intermediary plugin such as [wiki:trakt_add trakt_add]. There is [http://letterboxd.com/api-coming-soon/ no publicly available API for Letterboxd] as of yet, so the plugin works by combing through the HTML source code for each film's page on the site. This isn't particularly fast if you want to, say, use [wiki:crossmatch crossmatch] to reject films you've marked as seen on Letterboxd. In that case, you could have your config set up like this:
+    tasks:
+      queue-well-reviewed-films:
+        letterboxd:
+          username: *****
+          list: diary
+        if:
+          - 'letterboxd_uscore >= 8': accept
+        movie_queue: add
 
-{{{
-tasks:
-  add-to-trakt:
-    letterboxd:
-      username: *****
-      list: watched
-      sort_by: added
-      max_results: 20  # <--- Set depending on how often you run the task; high enough that it will catch all new entries,
-    accept_all: yes    #      but low enough so as not to parse (much) more of the list than is necessary. 
-    trakt_add:
-      username: *****
-      password: *****
-      list: watched
 
-  download-films:
-    some_input_plugin:
-    ...
-    crossmatch:
-      from:
-        - trakt_list:
-            username: *****
-            password: *****
-            list: watched
-            type: movies
-      fields:
-        - imdb_id
-      action: reject
-      ...
-}}}
+When dealing with large lists, it may be worthwhile to feed entries to an intermediary plugin such as [[trakt_add]. There is [http://letterboxd.com/api-coming-soon/ no publicly available API for Letterboxd] as of yet, so the plugin works by combing through the HTML source code for each film's page on the site. This isn't particularly fast if you want to, say, use [wiki:crossmatch crossmatch|trakt_add]] to reject films you've marked as seen on Letterboxd. In that case, you could have your config set up like this:
+
+
+    tasks:
+      add-to-trakt:
+        letterboxd:
+          username: *****
+          list: watched
+          sort_by: added
+          max_results: 20  # <--- Set depending on how often you run the task; high enough that it will catch all new entries,
+        accept_all: yes    #      but low enough so as not to parse (much) more of the list than is necessary. 
+        trakt_add:
+          username: *****
+          password: *****
+          list: watched
+    
+      download-films:
+        some_input_plugin:
+        ...
+        crossmatch:
+          from:
+            - trakt_list:
+                username: *****
+                password: *****
+                list: watched
+                type: movies
+          fields:
+            - imdb_id
+          action: reject
+          ...
+
