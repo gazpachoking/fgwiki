@@ -1,30 +1,30 @@
-= SFTP Upload =
+# SFTP Upload
 
 Upload files to a SFTP server. 
 
 This plugin requires the pysftp Python module; to install it module run:
 
-{{{
-easy_install pysftp
-or
-pip install  pysftp
-}}}
 
-pysftp depends on the Pycrypto library. If you are using Windows,you may have to install it manually. Windows binaries are available [http://www.voidspace.org.uk/python/modules.shtml#pycrypto here].
+    easy_install pysftp
+    or
+    pip install  pysftp
 
-== Example ==
 
-{{{
-sftp_upload:
-    host: 'hostname'
-    username: 'user'
-    private_key: ~/.ssh/id_rsa
-    to: './TV/{{series_name}}/Season {{series_season}}/'
-}}}
+pysftp depends on the Pycrypto library. If you are using Windows,you may have to install it manually. Windows binaries are available [[here|http://www.voidspace.org.uk/python/modules.shtml#pycrypto]].
 
-== Options ==
+## Example
 
-||'''Name'''||'''Info'''||'''Description'''||
+
+    sftp_upload:
+        host: 'hostname'
+        username: 'user'
+        private_key: ~/.ssh/id_rsa
+        to: './TV/{{series_name}}/Season {{series_season}}/'
+
+
+## Options
+
+||**Name*'||'''Info'''||'*Description**||
 || host || Text || Host to connect to ||
 || port || Integer || Port the remote SSH server is listening on. Defaults to port 22. ||
 || username || Text || Username to log in as ||
