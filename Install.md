@@ -1,12 +1,12 @@
-[[Include(wiki:InstallWizard)]]
+[[Include(wiki:[[InstallWizard]])]]
 
-=== Alternative route / Advanced ===
+### Alternative route / Advanced
 
 This is useful also if you're having problems with tar.gz installation or have a really small root filesystem.
 
- * [wiki:GitHubInstall GitHub install] (true bleeding edge)
+* [[GitHub install|Git[[HubInstall]]]] (true bleeding edge)
 
-=== Problems? ===
+### Problems?
 
-Few rare pip related problem solutions are documented in [wiki:PipProblems pip problems page].
-In case you run into unresolvable problem read [wiki:NeedHelp how to request help].
+Few rare pip related problem solutions are documented in [[pip problems page|PipProblems]].
+In case you run into unresolvable problem read [[how to request help|NeedHelp]].
