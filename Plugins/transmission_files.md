@@ -1,25 +1,24 @@
-= Transmission Files =
+# Transmission Files
 This plugin creates an entry for each file within the torrents you have loaded in transmission.
 
 This plugin requires the transmissionrpc library. To install it, run:
 
-{{{
-easy_install transmissionrpc
-}}}
+
+    easy_install transmissionrpc
+
 
 You may be required to upgrade transmissionrpc after upgrading transmission, for that just add `--upgrade` to the previous command.
+**Example:**
 
-'''Example:'''
 
-{{{
-transmission_files:
-  host: localhost
-  port: 9091
-  username: myusername
-  password: mypassword
-}}}
+    transmission_files:
+      host: localhost
+      port: 9091
+      username: myusername
+      password: mypassword
 
-||'''Name'''||'''Info'''||'''Description'''||
+
+||**Name*'||'''Info'''||'*Description**||
 ||host||Text||Where transmission is listening (default: localhost)||
 ||port||Number||Connected port (default: 9091)||
 ||netrc||File||||
