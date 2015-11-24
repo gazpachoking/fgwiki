@@ -1,4 +1,4 @@
 
-== Daemon ==
+## Daemon
 
 Refer to [wiki:/Daemon].
