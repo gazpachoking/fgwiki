@@ -35,158 +35,157 @@ Also at the end you'll find a little movies.sh bash script which I use to add mo
 
 
 
-{{{
-##########################################################################################################################################################
-#                                                                                                                                                        #
-#                                                                                                                                                        #
-#                                                        config.yml                                                                                      #
-#                                                                                                                                                        #
-#                                                                                                                                                        #
-##########################################################################################################################################################
 
-templates:
-  global:
-    cookies: ~/.flexget/cookies.sqlite
-    regexp:
-      reject:
-        - french
-        - german
-        - dutch
-        - ipod
-
-  tv_common:
-    inputs:
-      - rss: https://www.rss1.com
-      - rss: https://www.rss2.com
-      - rss: http://www.rss3.com
-    download: ~/rtorrent/Watch/
-    exists_series:
-      - ~/rtorrent/Completed/
-      - ~/rtorrent/Downloads/
-      - ~/rtorrent/Watch/
-    interval: 5 minutes
-
-
-  movies:
-    inputs:
-      - rss: http://www.rss4.com
-      - rss: https://www.rss5.com
-      - rss: http://www.rss6.com
-      - rss: http://www.rss7.com
-    content_size:
-      max: 1700
-    download: ~/rtorrent/Movies_Watch/
-    exists_movie:
-      - ~/rtorrent/Movies
-      - ~/rtorrent/Downloads
-      - ~/rtorrent/Movies_Watch
-    quality:
-      - <=1080p hdrip+
-    movie_queue: yes
-    proper_movies: no
-    verify_ssl_certificates: no
-    interval: 15 minutes
-
-tasks:
-  tv_feeds_lq:
-    template: tv_common
-    series:
-      settings:
-        group 1:
+    ##########################################################################################################################################################
+    #                                                                                                                                                        #
+    #                                                                                                                                                        #
+    #                                                        config.yml                                                                                      #
+    #                                                                                                                                                        #
+    #                                                                                                                                                        #
+    ##########################################################################################################################################################
+    
+    templates:
+      global:
+        cookies: ~/.flexget/cookies.sqlite
+        regexp:
+          reject:
+            - french
+            - german
+            - dutch
+            - ipod
+    
+      tv_common:
+        inputs:
+          - rss: https://www.rss1.com
+          - rss: https://www.rss2.com
+          - rss: http://www.rss3.com
+        download: ~/rtorrent/Watch/
+        exists_series:
+          - ~/rtorrent/Completed/
+          - ~/rtorrent/Downloads/
+          - ~/rtorrent/Watch/
+        interval: 5 minutes
+    
+    
+      movies:
+        inputs:
+          - rss: http://www.rss4.com
+          - rss: https://www.rss5.com
+          - rss: http://www.rss6.com
+          - rss: http://www.rss7.com
+        content_size:
+          max: 1700
+        download: ~/rtorrent/Movies_Watch/
+        exists_movie:
+          - ~/rtorrent/Movies
+          - ~/rtorrent/Downloads
+          - ~/rtorrent/Movies_Watch
+        quality:
+          - <=1080p hdrip+
+        movie_queue: yes
+        proper_movies: no
+        verify_ssl_certificates: no
+        interval: 15 minutes
+    
+    tasks:
+      tv_feeds_lq:
+        template: tv_common
+        series:
+          settings:
+            group 1:
+              propers: no
+        content_size:
+          max: 500
+          strict: no
+        include: series.yml
+    
+      tv_feeds_hq:
+        template: tv_common
+        series:
+          settings:
+            group 1:
+              propers: no
+        content_size:
+          max: 1500
+          strict: no
+        delay: 2 hours
+        include: series.yml
+    
+      premiers_lq:
+        template: tv_common
+        series_premiere:
           propers: no
-    content_size:
-      max: 500
-      strict: no
-    include: series.yml
-
-  tv_feeds_hq:
-    template: tv_common
-    series:
-      settings:
-        group 1:
+          allow_seasonless: yes
+        content_size:
+          max: 500
+          strict: no
+        thetvdb_lookup: yes
+        require_field: tvdb_genres
+        regexp:
+          reject:
+            - documentary: {from: tvdb_genres}
+            - talk show: {from: tvdb_genres}
+            - game show: {from: tvdb_genres}
+            - reality: {from: tvdb_genres}
+            - news: {from: tvdb_genres}
+    
+      premiers_hq:
+        template: tv_common
+        series_premiere:
           propers: no
-    content_size:
-      max: 1500
-      strict: no
-    delay: 2 hours
-    include: series.yml
-
-  premiers_lq:
-    template: tv_common
-    series_premiere:
-      propers: no
-      allow_seasonless: yes
-    content_size:
-      max: 500
-      strict: no
-    thetvdb_lookup: yes
-    require_field: tvdb_genres
-    regexp:
-      reject:
-        - documentary: {from: tvdb_genres}
-        - talk show: {from: tvdb_genres}
-        - game show: {from: tvdb_genres}
-        - reality: {from: tvdb_genres}
-        - news: {from: tvdb_genres}
-
-  premiers_hq:
-    template: tv_common
-    series_premiere:
-      propers: no
-      allow_seasonless: yes
-    content_size:
-      max: 1500
-      strict: no
-    delay: 2 hours
-    thetvdb_lookup: yes
-    require_field: tvdb_genres
-    regexp:
-      reject:
-        - documentary: {from: tvdb_genres}
-        - talk show: {from: tvdb_genres}
-        - game show: {from: tvdb_genres}
-        - reality: {from: tvdb_genres}
-        - news: {from: tvdb_genres}
-
-  movie_feeds:
-    template: movies
-
-}}}
+          allow_seasonless: yes
+        content_size:
+          max: 1500
+          strict: no
+        delay: 2 hours
+        thetvdb_lookup: yes
+        require_field: tvdb_genres
+        regexp:
+          reject:
+            - documentary: {from: tvdb_genres}
+            - talk show: {from: tvdb_genres}
+            - game show: {from: tvdb_genres}
+            - reality: {from: tvdb_genres}
+            - news: {from: tvdb_genres}
+    
+      movie_feeds:
+        template: movies
+    
 
 
 
 
-{{{
-##########################################################################################################################################################
-#                                                                                                                                                        #
-#                                                                                                                                                        #
-#                                                        series.yml                                                                                      #
-#                                                                                                                                                        #
-#                                                                                                                                                        #
-##########################################################################################################################################################
-series:
-  group 1:
-    - House
-    - CSI Miami
-    - CSI New York
-    - CSI
-    - NCIS Los Angeles
-    - NCIS
-    - Doctor Who 2005
-    - Torchwood
-    - The IT Crowd
-    - The Big Bang Theory
-    - Star Wars The Clone Wars
-    - Fringe
-    - Supernatural
-    - [.... add more shows ....]
-}}}
+
+
+    ##########################################################################################################################################################
+    #                                                                                                                                                        #
+    #                                                                                                                                                        #
+    #                                                        series.yml                                                                                      #
+    #                                                                                                                                                        #
+    #                                                                                                                                                        #
+    ##########################################################################################################################################################
+    series:
+      group 1:
+        - House
+        - CSI Miami
+        - CSI New York
+        - CSI
+        - NCIS Los Angeles
+        - NCIS
+        - Doctor Who 2005
+        - Torchwood
+        - The IT Crowd
+        - The Big Bang Theory
+        - Star Wars The Clone Wars
+        - Fringe
+        - Supernatural
+        - [[add more shows ....|....]]
 
 
 
 
-{{{
-#!/bin/bash
+
+```/bin/bash
 ##########################################################################################################################################################
 #                                                                                                                                                        #
 #                                                                                                                                                        #
@@ -219,4 +218,4 @@ imdb2=${imdb1//\//}
 #$FLEXGET --movie-queue add $1 $QUALITY
 echo "$FLEXGET movie-queue add imdb_id=${imdb2} $QUALITY"
 $FLEXGET movie-queue add imdb_id=${imdb2} "${QUALITY}"
-}}}
+```
