@@ -1,3 +1,3 @@
 Deprecated. See:
 
-[wiki:CookBook]
+[wiki:[[CookBook]]]
