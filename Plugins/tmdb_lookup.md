@@ -1,12 +1,11 @@
-= Tmdb lookup =
+# Tmdb lookup
+**Example:**
 
-'''Example:'''
 
-{{{
-tmdb_lookup: yes
-}}}
+    tmdb_lookup: yes
 
-== Provides fields ==
+
+## Provides fields
 
 ||=Field Name=||
 ||tmdb_name||
