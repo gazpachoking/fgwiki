@@ -1,14 +1,14 @@
-= KAT =
-Generate entries from [http://kat.ph kat.ph] search results.
+# KAT
+Generate entries from [[kat.ph|http://kat.ph]] search results.
 
-=== Config Format ===
-{{{
-kat:
-  category: <category>
-  verified: yes/no
-}}}
+### Config Format
 
-||= Categories =||
+    kat:
+      category: <category>
+      verified: yes/no
+
+
+||# Categories||
 ||all||
 ||movies||
 ||tv||
