@@ -1,4 +1,4 @@
-= Urlrewrite recipes =
+# Urlrewrite recipes
 
- * [wiki:Cookbook/Urlrewrite/nzbclub nzbclub]
- * [wiki:Cookbook/Urlrewrite/anirena anirena]
+* [[nzbclub|Cookbook/Urlrewrite/nzbclub]]
+* [[anirena|Cookbook/Urlrewrite/anirena]]
