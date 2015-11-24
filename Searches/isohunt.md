@@ -1,14 +1,13 @@
-= Isohunt Search plugin =
+# Isohunt Search plugin
 
 A search plugin that generates sorted entries from isohunt.
+**Note:** Due to code changes (and domain change from isohunt.com -> isohunt.to) from Isohunt, this plugin no longer works. Ticket ref: [http://flexget.com/ticket/3056#ticket]
 
-'''Note:''' Due to code changes (and domain change from isohunt.com -> isohunt.to) from Isohunt, this plugin no longer works. Ticket ref: [http://flexget.com/ticket/3056#ticket]
-
-== Config Format ==
+## Config Format
 
 isohunt: <category>
 
-||'''Category'''||'''Description'''||
+||**Category*'||'*Description**||
 ||all||Not filtered by any category||
 ||misc||Category for miscellaneous files||
 ||movies||Main category for movies & other videos||
