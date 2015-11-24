@@ -1,3 +1,3 @@
-= Sorry =
+# Sorry
 
-The princess is in the [wiki:"Cookbook" another castle]
+The princess is in the [[another castle|"Cookbook"]]
