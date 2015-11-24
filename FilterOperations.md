@@ -1,11 +1,9 @@
-= Operations =
+# Operations
+**Note:** For 0.9.x see [[older version|FilterOperations?version=16]]
 
-'''Note:''' For 0.9.x see [wiki:FilterOperations?version=16 older version]
+All plugins may do following operations to [[entry|Entry]].
 
-All plugins may do following operations to [wiki:Entry entry].
-
-{{{
-#!html
+```html
 <table class="wiki">
 <tr>
   <td><strong>Operation</strong></td>
@@ -21,29 +19,29 @@ All plugins may do following operations to [wiki:Entry entry].
   <td>Entry is not marked to any category <i>(default)</i></td>
 </tr>
 </table>
-}}}
+```
 
-=== Represented as a schematic ===
+### Represented as a schematic
 
 [[Image(1.0_operations.png)]]
 
-== Scenario ==
+## Scenario
 
 Assuming configuration:
 
-{{{
-regexp:
-  accept:
-    - Something
-  reject:
-    - CAM
-}}}
 
-Q: What would happen to file '''Something.CAM.XviD'''[[BR]]
+    regexp:
+      accept:
+        - Something
+      reject:
+        - CAM
+
+
+Q: What would happen to file **Something.CAM.XviD**(XXX macro: "BR")
 A: It would be rejected, since reject operation is stronger than accept.
 
-Q: What would happen to file '''Something.XviD'''[[BR]]
+Q: What would happen to file **Something.XviD**(XXX macro: "BR")
 A: It would be accepted
 
-Q: What would happen to file '''Example.XviD'''[[BR]]
+Q: What would happen to file **Example.XviD**(XXX macro: "BR")
 A: It wouldn't be intervened any way, neither accepted nor rejected. Note that output plugins are interested only in accepted entries.
