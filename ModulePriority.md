@@ -1,13 +1,13 @@
-= Experimental, only in /trunk/ =
+# Experimental, only in /trunk/
 
-= Priority =
+# Priority
 
 Change module execution order by editing module priorities. Modules are executed from lowest priority to highest.
 
-=== Example ===
+### Example
 
-{{{
-priority:
-  regexp: 10
-  imdb: 20
-}}}
+
+    priority:
+      regexp: 10
+      imdb: 20
+
