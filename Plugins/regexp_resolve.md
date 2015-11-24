@@ -1,4 +1,4 @@
-== Oops, moved ==
+## Oops, moved
 
 Plugin has been deleted, see
 
