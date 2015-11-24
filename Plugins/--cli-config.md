@@ -1,4 +1,4 @@
-= Commandline config =
+# Commandline config
 
 Allows specifying configuration values from commandline parameters.
 
@@ -7,15 +7,15 @@ Commandline parameter must be comma separated list of variable=values.
 
 Configuration example:
 
-{{{
-tasks:
-  my task:
-    rss: $url
-    download: $path
-}}}
+
+    tasks:
+      my task:
+        rss: $url
+        download: $path
+
 
 Commandline example:
 
-{{{
---cli-config "url=http://some.url/, path=~/downloads"
-}}}
+
+    --cli-config "url=http://some.url/, path=~/downloads"
+
