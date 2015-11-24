@@ -1,2 +1,2 @@
-= Emit Digest =
-This plugin outputs entries which have been collected by the [wiki:Plugins/digest digest] plugin. See [wiki:Plugins/digest that] wiki page for usage.
+# Emit Digest
+This plugin outputs entries which have been collected by the [[digest] plugin. See [wiki:Plugins/digest that|Plugins/digest]] wiki page for usage.
