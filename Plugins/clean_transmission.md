@@ -1,29 +1,28 @@
-= Clean Transmission =
-This plugin cleans the Transmission's queue of finished torrents (=the torrents that have completed the download process and are in '''stopped, finished or seeding''' state).
+# Clean Transmission
+This plugin cleans the Transmission's queue of finished torrents (=the torrents that have completed the download process and are in **stopped, finished or seeding** state).
 
 This plugin requires the transmissionrpc library. To install it, run:
 
-{{{
-easy_install transmissionrpc
-}}}
+
+    easy_install transmissionrpc
+
 
 You may be required to upgrade transmissionrpc after upgrading transmission, for that just add `--upgrade` to the previous command.
+**Example:**
 
-'''Example:'''
 
-{{{
-clean_transmission:
-  host: localhost
-  port: 9091
-  username: myusername
-  password: mypassword
-  finished_for: 2 hours
-  min_ratio: 1
-  tracker: nyaa|animebytes
-disable: [details]
-}}}
+    clean_transmission:
+      host: localhost
+      port: 9091
+      username: myusername
+      password: mypassword
+      finished_for: 2 hours
+      min_ratio: 1
+      tracker: nyaa|animebytes
+    disable: [details]
 
-||'''Name'''||'''Info'''||'''Description'''||
+
+||**Name*'||'''Info'''||'*Description**||
 ||host||Text||Where transmission is listening (default: localhost)||
 ||port||Number||Connected port (default: 9091)||
 ||netrc||File||||
@@ -31,12 +30,11 @@ disable: [details]
 ||password||Text||||
 ||finished_for||Interval||(optional) remove only torrents finished for at least the specified time (1 hours, 2 days, etc).||
 ||min_ratio||Number||(optional) remove only torrents uploaded at least this ratio (0=0%, 0.5=50%, 1=100% etc)||
-||tracker||!RegExp||(optional) remove only torrents with a tracker hostname matching this [[https://docs.python.org/2/library/re.html#regular-expression-syntax|regular expression]]||
+||tracker||RegExp||(optional) remove only torrents with a tracker hostname matching this [[expression]|[https://docs.python.org/2/library/re.html#regular-expression-syntax|regular]]||
 ||delete_files||[Yes|No]||(optional) also delete local files (default: no)||
 ||transmission_seed_limits||[Yes|No]||(optional) uses transmission's internal limits for idle time and seed ratio (default: no)||
 ||enabled||[Yes|No]||Plugin enabled (default: yes)||
-
-'''Note:'''
+**Note:**
 
 - If `finished_for` and/or `min_ratio` parameters are defined, all the finished torrents meeting one or both the conditions will be removed.
 - The `tracker` regular expression will match any part of a tracker's hostname. Use `^` or `$` to restrict matching to the beginning or end of hostnames (e.g. `\.se$` to match only trackers under the Swedish top-level domain).
