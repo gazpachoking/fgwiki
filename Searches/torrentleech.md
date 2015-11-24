@@ -1,14 +1,14 @@
-= Torrentleech =
+# Torrentleech
 This search plugin will get results from [http://torrentleech.org]
 
-== Configuration ==
+## Configuration
 Configuration requires rss_key, username, and password:
-{{{
-torrentleech: 
-  rss_key: xxxxxxxxxxxxxxxxxxxx
-  username: xxxxxx
-  password: xxxxxx
-}}}
+
+    torrentleech: 
+      rss_key: xxxxxxxxxxxxxxxxxxxx
+      username: xxxxxx
+      password: xxxxxx
+
 If you would like to define a custom category, you can use the following option:
  category::
  Can be one of the following: \\
@@ -16,10 +16,10 @@ If you would like to define a custom category, you can use the following option:
  You can also specify the category number directly from Torrentleech if it is not listed above. \\
  
 Example:
-{{{
-torrentleech: 
-  rss_key: xxxxxxxxxxxxxxxxxxxx
-  username: xxxxxx
-  password: xxxxxx
-  category: HD
-}}}
+
+    torrentleech: 
+      rss_key: xxxxxxxxxxxxxxxxxxxx
+      username: xxxxxx
+      password: xxxxxx
+      category: HD
+
