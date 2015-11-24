@@ -1,25 +1,25 @@
-= Newnzab plugin =
+# Newnzab plugin
 
-The newznab plugins is used in conjunction with the [wiki:Plugins/discover discover] plugins.
+The newznab plugins is used in conjunction with the [[discover|Plugins/discover]] plugins.
 
-With the [wiki:Plugins/emit_series emit_series]
-{{{
-discover:
-  what:
-    - emit_series : yes
-  from: 
-    - newnab:
-}}}
+With the [[emit_series|Plugins/emit_series]]
 
-or the [wiki:Plugins/emit_movie_queue emit_movie_queue]
+    discover:
+      what:
+        - emit_series : yes
+      from: 
+        - newnab:
 
-{{{
-discover:
-  what:
-    - emit_movie_queue : yes
-  from: 
-    - newnab:
-}}}
+
+or the [[emit_movie_queue|Plugins/emit_movie_queue]]
+
+
+    discover:
+      what:
+        - emit_movie_queue : yes
+      from: 
+        - newnab:
+
 
 
 You need then to configure the newznab plugins, which take 4 parameters :
