@@ -1,26 +1,25 @@
-= Private Torrents =
+# Private Torrents
 
 Uses private flag in torrent file to determine what to do with private torrents.
+**Syntax:**
 
-'''Syntax:'''
 
-{{{
-private_torrents: yes|no
-}}}
+    private_torrents: yes|no
 
-=== Example ===
 
-{{{
-private_torrents: no
-}}}
+### Example
+
+
+    private_torrents: no
+
 
 This would reject all torrent entries with private flag.
 
-=== Example ===
+### Example
 
-{{{
-private_torrents: yes
-}}}
+
+    private_torrents: yes
+
 
 This would reject all public torrents.
 
