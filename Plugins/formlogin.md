@@ -1,47 +1,46 @@
-= Form Login =
+# Form Login
 
 Log in to a site using a webform
 
 This plugin requires the mechanize library. To install it, run:
 
-{{{
-easy_install mechanize
-}}}
 
-=== Example ===
+    easy_install mechanize
 
-{{{
-form:
-  url: http://example.com/login.php
-  username: <username>
-  password: <password>
-}}}
 
-=== Example 2 ===
+### Example
+
+
+    form:
+      url: http://example.com/login.php
+      username: <username>
+      password: <password>
+
+
+### Example 2
 
 The login module just performs the login, you need to use other plugins to process content from the site:
 
-{{{
-form:
-  url: http://example.com/login.php
-  username: <username>
-  password: <password>
-html:
-  url: http://example.com/browse.php?cat=1
-regexp:
-  accept:
-    - Paddy.Obrien
-}}}
+
+    form:
+      url: http://example.com/login.php
+      username: <username>
+      password: <password>
+    html:
+      url: http://example.com/browse.php?cat=1
+    regexp:
+      accept:
+        - Paddy.Obrien
 
 
 
-== Options ==
+
+## Options
 
 All options except for the API key are optional
+**Options**
 
-'''Options'''
-
-||'''Name'''||'''Description'''||
+||**Name*'||'*Description**||
 ||form||URL to the login form||
 ||username||Username to the site||
 ||password||Password||
