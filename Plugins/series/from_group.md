@@ -1,20 +1,18 @@
-== Specify group (eg. anime fansubs) ==
+## Specify group (eg. anime fansubs)
+**Example:**
 
-'''Example:'''
 
-{{{
-series:
-  - fullmetal alchemist brotherhood:
-      from_group: eclipse
-  - naruto:
-      from_group:
-        - horriblesubs
-        - crunchysubs
-}}}
+    series:
+      - fullmetal alchemist brotherhood:
+          from_group: eclipse
+      - naruto:
+          from_group:
+            - horriblesubs
+            - crunchysubs
 
-'''Supported notations:'''
+**Supported notations:**
 
- * [Group] Series
- * Series XviD-Group
+* [Group] Series
+* Series XviD-Group
 
-To disallow certain groups use [wiki:Plugins/regexp regexp] plugin to reject them.
+To disallow certain groups use [[regexp|Plugins/regexp]] plugin to reject them.
