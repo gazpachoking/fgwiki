@@ -7,34 +7,34 @@ Because manual: yes is set this task will not run normally you will have to call
 
 To run the task you would do one of the following note that the season number is optional but useful since the rss feed will only return so many results, --disable-advancement is used since exists_series will be used to prevent dup episodes:
 
-{{{
-flexget --test execute --tasks SearchEZTV --cli-config "show=[Yourshowname],season=[number]" --disable-advancement
-flexget --test execute --tasks SearchEZTV --cli-config "show=[Yourshowname]" --disable-advancement
-}}}
+
+    flexget --test execute --tasks SearchEZTV --cli-config "show=[Yourshowname],season=[number]" --disable-advancement
+    flexget --test execute --tasks SearchEZTV --cli-config "show=[Yourshowname]" --disable-advancement
 
 
-{{{
-  SearchEZTV:
-    discover:
-      what:
-        - mock: 
-          - title: $show
-      from:
-        - search_rss: http://www.ezrss.it/search/index.php?show_name={{search_term}}&season=$season&show_name_exact=false&quality=hdtv&mode=rss
-      type: any
-    thetvdb_lookup: yes
-    exists_series:
-      - /TV/$show
-    series:
-      settings:
-        hdtv:
-          set:
-            movedone: '/TV/{{series_name}}/Season {{series_season}}'
-            content_filename: "{{ series_name }} - {{ series_id }} - {{ ep_name|default('Unknown') }}  - {{ quality|upper }}"
-      hdtv:
-        - $show
-    manual: yes
-}}}
+
+
+      SearchEZTV:
+        discover:
+          what:
+            - mock: 
+              - title: $show
+          from:
+            - search_rss: http://www.ezrss.it/search/index.php?show_name={{search_term}}&season=$season&show_name_exact=false&quality=hdtv&mode=rss
+          type: any
+        thetvdb_lookup: yes
+        exists_series:
+          - /TV/$show
+        series:
+          settings:
+            hdtv:
+              set:
+                movedone: '/TV/{{series_name}}/Season {{series_season}}'
+                content_filename: "{{ series_name }} - {{ series_id }} - {{ ep_name|default('Unknown') }}  - {{ quality|upper }}"
+          hdtv:
+            - $show
+        manual: yes
+
 
 Notes:
 
