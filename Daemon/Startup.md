@@ -1,40 +1,38 @@
-= Automatic Daemon Startup =
+# Automatic Daemon Startup
 
 
 
-== Linux ==
+## Linux
 
 There are several methods which can be used to start the daemon on linux.
 
-=== Cron ===
+### Cron
 
 The easiest method is probably to have cron start the daemon on boot, and is compatible with most (all?) flavors of linux.
 
-To edit user crontab execute command (Note: [https://help.ubuntu.com/community/CronHowto#Enable%20User%20Level%20Cron ubuntu]):
+To edit user crontab execute command (Note: [[ubuntu|https://help.ubuntu.com/community/CronHowto#Enable%20User%20Level%20Cron]]):
 
-{{{
-crontab -e
-}}}
+
+    crontab -e
+
 
 And add the line:
 
-{{{
-@reboot /usr/local/bin/flexget daemon start -d
-}}}
 
-=== Upstart script (Ubuntu family) ===
+    @reboot /usr/local/bin/flexget daemon start -d
+
+
+### Upstart script (Ubuntu family)
 To have flexget daemon automatically start on system boot
 
 sudo vim /etc/init/flexget.conf
-{{{
-#!/bin/bash
+```/bin/bash
 # Flexget daemon autostart                                                                                                                                                      
 
 description "Flexget daemon"
 author "Kempe"
 
-start on (filesystem and networking) or runlevel [2345]
-stop on runlevel [016]
+start on (filesystem and networking) or runlevel [[stop on runlevel [016|2345]]]
 
 respawn
 respawn limit 5 30
@@ -47,55 +45,54 @@ env loglvl=<LOG_LEVEL_FROM LIST BELOW>
 #log levels none, critical,error, warning, info, verbose, debug, trace
 
 exec start-stop-daemon -S -c $uid:$gid -x /usr/local/bin/flexget -- -L $loglvl daemon start
-}}}
+```
 
 Read log: 
-{{{ 
-sudo tail -f /var/log/upstart/flexget.log
-}}}
+
+    sudo tail -f /var/log/upstart/flexget.log
+
 
 Control daemon:
 
-{{{
-sudo status flexget
-sudo stop flexget
-sudo start flexget
-}}}
 
-=== Insserv script (Debian compatible) ===
+    sudo status flexget
+    sudo stop flexget
+    sudo start flexget
+
+
+### Insserv script (Debian compatible)
 This script allows the flexget daemon to automatically start on system boot.
 
 All of the following should be done as the root user.
 
 First, create a /etc/default/flexget file with the following content :
 
-{{{
-# Configuration for /etc/init.d/flexget
 
-# User to run flexget as.
-# Daemon will not start if left empty.
-FGUSER=""
+    # Configuration for /etc/init.d/flexget
+    
+    # User to run flexget as.
+    # Daemon will not start if left empty.
+    FGUSER=""
+    
+    # Full path to the flexget config.yml file to use.
+    # Defaults to FGUSER $HOME/.flexget/config.yml
+    CONFIG=""
+    
+    # Path to the directory where flexget should log. Do not add trailing slash.
+    # Defaults to the FGUSER $HOME/.flexget directory
+    LOG=""
+    
+    # Log verbosity 
+    # Available options : none critical error warning info verbose debug trace
+    # Defaults to info
+    LEVEL=""
 
-# Full path to the flexget config.yml file to use.
-# Defaults to FGUSER $HOME/.flexget/config.yml
-CONFIG=""
-
-# Path to the directory where flexget should log. Do not add trailing slash.
-# Defaults to the FGUSER $HOME/.flexget directory
-LOG=""
-
-# Log verbosity 
-# Available options : none critical error warning info verbose debug trace
-# Defaults to info
-LEVEL=""
-}}}
 
 Please note that FGUSER needs to be defined for the daemon to start. It can be set to your current user, or you can run flexget as its own user.
 
 Then, create the /etc/init.d/flexget file :
 
-{{{
-#!/bin/bash
+```/bin/bash
 
 ### BEGIN INIT INFO
 # Provides:          flexget
@@ -106,7 +103,7 @@ Then, create the /etc/init.d/flexget file :
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Flexget
-# Description:       FlexGet is a multipurpose automation tool 
+# Description:       [[FlexGet]] is a multipurpose automation tool 
 #                    for content like torrents, nzbs, podcasts,
 #                    comics, series, movies, etc.
 ### END INIT INFO
@@ -246,170 +243,169 @@ case "$1" in
 esac
 
 exit 0
-}}}
+```
 
 Then, give executions rights to the script :
 
-{{{
-chmod +x /etc/init.d/flexget
-}}}
+
+    chmod +x /etc/init.d/flexget
+
 
 And then, generate the necessary symlinks for the service to start on boot :
-{{{
-insserv -d flexget
 
-OR
+    insserv -d flexget
+    
+    OR
+    
+    update-rc.d flexget defaults
 
-update-rc.d flexget defaults
-}}}
 
 To start, stop or check if the daemon is running :
-{{{
-/etc/init.d/flexget start
-/etc/init.d/flexget stop
-/etc/init.d/flexget status
 
-OR
+    /etc/init.d/flexget start
+    /etc/init.d/flexget stop
+    /etc/init.d/flexget status
+    
+    OR
+    
+    service flexget start
+    service flexget stop
+    service flexget status
 
-service flexget start
-service flexget stop
-service flexget status
-}}}
-=== Systemd system unit (Arch Linux, Fedora, etc.) ===
+### Systemd system unit (Arch Linux, Fedora, etc.)
 
 To have flexget run as a system unit.
 
-{{{
-[Unit]
-Description=Flexget Daemon
-After=network.target
 
-[Service]
-Type=simple
-User=daemon
-Group=daemon
-UMask=000
-WorkingDirectory=/etc/flexget
-ExecStart=/usr/bin/flexget daemon start
-ExecStop=/usr/bin/flexget daemon stop
-ExecReload=/usr/bin/flexget daemon reload
+    [Unit]
+    Description=Flexget Daemon
+    After=network.target
+    
+    [Service]
+    Type=simple
+    User=daemon
+    Group=daemon
+    UMask=000
+    [[WorkingDirectory]]=/etc/flexget
+    [[ExecStart]]=/usr/bin/flexget daemon start
+    [[ExecStop]]=/usr/bin/flexget daemon stop
+    [[ExecReload]]=/usr/bin/flexget daemon reload
+    
+    [Install]
+    [[WantedBy]]=multi-user.target
 
-[Install]
-WantedBy=multi-user.target
-}}}
 
 The above assumes that there is a daemon user and group available. Modify as needed.
 
 Now, create the location to store flexgets configuration file, logs and database.
 
-{{{
-sudo mkdir /etc/flexget
-sudo chown daemon:daemon /etc/flexget
-}}}
+
+    sudo mkdir /etc/flexget
+    sudo chown daemon:daemon /etc/flexget
+
 
 You can now place your config.yml file in the /etc/flexget directory.
 
 Enable or disable Flexget at boot using :
 
-{{{
-sudo systemctl enable flexget
-sudo systemctl disable flexget
-}}}
+
+    sudo systemctl enable flexget
+    sudo systemctl disable flexget
+
 
 Read the systemd log: 
 
-{{{ 
-journalctl --u flexget
-}}}
+
+    journalctl --u flexget
+
 
 Control the daemon:
 
-{{{
-systemctl status flexget
-systemctl stop flexget
-systemctl start flexget
-}}}
+
+    systemctl status flexget
+    systemctl stop flexget
+    systemctl start flexget
 
 
-=== Systemd user unit (Arch Linux, Fedora, etc) ===
-From @mkaito, Trac #[http://flexget.com/ticket/2526 2526].
+
+### Systemd user unit (Arch Linux, Fedora, etc)
+From @mkaito, Trac #[[2526|http://flexget.com/ticket/2526]].
 
 To have flexget by accessible as a systemd user unit.
 
-See [https://wiki.archlinux.org/index.php/Systemd/User#User_Services here] for more.
+See [[here|https://wiki.archlinux.org/index.php/Systemd/User#User_Services]] for more.
 
 sudo vim /usr/lib/systemd/user/flexget.service or vim ~/.config/systemd/user/flexget.service
-{{{
-[Unit]
-Description=FlexGet Daemon
-After=network.target
 
-[Service]
-ExecStart=/usr/bin/flexget daemon start
-ExecStop=/usr/bin/flexget daemon stop
-ExecReload=/usr/bin/flexget daemon reload
+    [Unit]
+    Description=[[FlexGet]] Daemon
+    After=network.target
+    
+    [Service]
+    [[ExecStart]]=/usr/bin/flexget daemon start
+    [[ExecStop]]=/usr/bin/flexget daemon stop
+    [[ExecReload]]=/usr/bin/flexget daemon reload
+    
+    [Install]
+    [[WantedBy]]=default.target
 
-[Install]
-WantedBy=default.target
-}}}
 
 Allows users who are not logged in to run long-running services.
 A user manager is spawned for the user at boot and kept around after logouts.
-{{{
-sudo loginctl enable-linger <username>
-}}}
+
+    sudo loginctl enable-linger <username>
+
 
 Any end-users can enable or disable it using :
-{{{
-systemctl --user enable flexget
-systemctl --user disable flexget
-}}}
+
+    systemctl --user enable flexget
+    systemctl --user disable flexget
+
 
 Read log: 
-{{{ 
-journalctl --user --user-unit flexget
-}}}
+
+    journalctl --user --user-unit flexget
+
 
 Control daemon:
 
-{{{
-systemctl --user status flexget
-systemctl --user stop flexget
-systemctl --user start flexget
-}}}
+
+    systemctl --user status flexget
+    systemctl --user stop flexget
+    systemctl --user start flexget
 
 
-== As a Windows Scheduled Task ==
+
+## As a Windows Scheduled Task
 
 In the Task Scheduler, "Create a Task". Use a descriptive name. Set a new trigger - "At log on" or "At startup" are good candidates. Optionally set a small delay. Configure an action - "Start a program". Navigate to your Python scripts folder and select "flexget-headless.exe". Add arguments: "daemon start". Hit "OK". Optionally run your new task, then check on it using flexget daemon status.
 
-== As an OS X Launch Agent ==
+## As an OS X Launch Agent
 
-Do not use this method if you want to set up Flexget to run at an interval as described [wiki:InstallWizard/OSX#Autorun here]. If you have set up the Launch Agent described in the OS X install section, replace it's plist with the one described below.
+Do not use this method if you want to set up Flexget to run at an interval as described [[here|InstallWizard/OSX#Autorun]]. If you have set up the Launch Agent described in the OS X install section, replace it's plist with the one described below.
 
 This method additionally overcomes the issues associated with launching the daemon in the background on OS X, allowing it to run in the background without an open Terminal window.
 
 Create /Users/USERNAME/Library/LaunchAgents/com.flexget.plist with:
 
-{{{
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>Label</key>
-	<string>com.flexget</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/usr/local/bin/flexget</string>
-		<string>daemon</string>
-		<string>start</string>
-	</array>
-	<key>Nice</key>
-	<integer>1</integer>
-	<key>RunAtLoad</key>
-	<true/>
-</dict>
-</plist>
-}}}
 
-'''Note''': On some systems, FlexGet installs itself into {{{/bin/flexget}}} instead of {{{/usr/local/bin/flexget}}}; type {{{which flexget}}} to find out where the FlexGet binary is located and modify {{{com.flexget.plist}}} accordingly.
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+    	<key>Label</key>
+    	<string>com.flexget</string>
+    	<key>[[ProgramArguments]]</key>
+    	<array>
+    		<string>/usr/local/bin/flexget</string>
+    		<string>daemon</string>
+    		<string>start</string>
+    	</array>
+    	<key>Nice</key>
+    	<integer>1</integer>
+    	<key>[[RunAtLoad]]</key>
+    	<true/>
+    </dict>
+    </plist>
+
+**Note**: On some systems, [[FlexGet]] installs itself into `/bin/flexget` instead of `/usr/local/bin/flexget`; type `which flexget` to find out where the [[FlexGet]] binary is located and modify `com.flexget.plist` accordingly.
