@@ -1,27 +1,26 @@
-= Deprecated = 
+# Deprecated 
 
-We now use !GitHub as primary repository. Left page for history.
+We now use GitHub as primary repository. Left page for history.
 
-== Why Trac and svn ? ==
+## Why Trac and svn ?
 
- * !FlexGet was started before !GitHub or !BitBucket even existed in relevant form.
- * Our build system is integrated with svn revision numbering, of course this could be changed but it requires effort.
- * !GitHub and !BitBucket don't really allow making nice site for a project like Trac wiki does (current flexget.com). Who writes us new site?
- * We have SVN hooks .. who remakes them with callbacks?
- * Hudson needs to be reconfigured .. who does that?
- * Trac sucks with !GitHub, the integration is not just at the level where it is with svn.
+* FlexGet was started before GitHub or BitBucket even existed in relevant form.
+* Our build system is integrated with svn revision numbering, of course this could be changed but it requires effort.
+* GitHub and BitBucket don't really allow making nice site for a project like Trac wiki does (current flexget.com). Who writes us new site?
+* We have SVN hooks .. who remakes them with callbacks?
+* Hudson needs to be reconfigured .. who does that?
+* Trac sucks with GitHub, the integration is not just at the level where it is with svn.
 
-=== How about some !GitHub presence? ===
+### How about some GitHub presence?
 
-Sure, if someone provides us scripts to sync !GitHub <-> SVN ... I know we would slightly more patches being present in !GitHub.
+Sure, if someone provides us scripts to sync GitHub <-> SVN ... I know we would slightly more patches being present in GitHub.
+**In short, change requires more effort than we are / I am willing to put into it at the moment! **
 
-'''In short, change requires more effort than we are / I am willing to put into it at the moment! '''
+### Github svn sync
 
-=== Github svn sync ===
+[[Balboah] is working on having a [https://github.com/Flexget/Flexget maintained copy|https://github.com/balboah]] of the svn repository in github, to have the commits pretty and dandy with the correct committer and everything, we need your git commit name and e-mail (preferably one that matches your github account). Please edit this list:
 
-[https://github.com/balboah Balboah] is working on having a [https://github.com/Flexget/Flexget maintained copy] of the svn repository in github, to have the commits pretty and dandy with the correct committer and everything, we need your git commit name and e-mail (preferably one that matches your github account). Please edit this list:
-
-||'''Username'''||'''Firstname Lastname'''||'''Email'''||
+||**Username*'||'''Firstname Lastname'''||'*Email**||
 ||branstrom||NAME||<USER@DOMAIN>||
 ||bryanforbes||NAME||<USER@DOMAIN>||
 ||dragonfyre13||NAME||<USER@DOMAIN>||
