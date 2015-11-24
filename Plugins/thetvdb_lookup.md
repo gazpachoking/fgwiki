@@ -1,15 +1,15 @@
-= TheTVDB Lookup =
+# TheTVDB Lookup
 
 For most purposes, the series name is sufficient to get a match on TheTVDB. If you can't get a match (e.g., multiple IDs defined for a series name) then you can provide the tvdb_id from their website to bypass the matching process.
 
-{{{
-series:
-  - some_series:
-      set:
-        tvdb_id: <tvdb_id>
-}}}
 
-This plugin looks up more information from thetvdb.com about any entries that !FlexGet has identified as series. thetvdb_lookup will populate several more entry fields that can be used in other plugins.
+    series:
+      - some_series:
+          set:
+            tvdb_id: <tvdb_id>
+
+
+This plugin looks up more information from thetvdb.com about any entries that FlexGet has identified as series. thetvdb_lookup will populate several more entry fields that can be used in other plugins.
 
 ||tvdb_series_name||Series name provided by thetvdb||
 ||tvdb_rating||Series rating||
@@ -40,14 +40,13 @@ This plugin looks up more information from thetvdb.com about any entries that !F
 ||tvdb_ep_image_url||Episode image url||
 ||tvdb_season||Season number of this episode.||
 ||tvdb_episode||Episode number.||
-||tvdb_ep_id||Season and episode in SxxEyy format.||
+||tvdb_ep_id||Season and episode in [[SxxEyy]] format.||
 ||tvdb_absolute_number||Absolute number of this episode.||
+**Example:**
 
-'''Example:'''
+The most common use is to look up an episode title that can be used to format a pretty filename. This example uses `tvdb_ep_name` as parsed by thetvdb_lookup in the [[set] plugin to set `content_filename` (which the [wiki:Plugins/deluge deluge|Plugins/set]] plugin uses to rename the main file within a torrent.) The 'default' jinja filter is used to insert 'Unknown' if thetvdb_lookup fails to get an tvdb_ep_name for the entry.
 
-The most common use is to look up an episode title that can be used to format a pretty filename. This example uses {{{tvdb_ep_name}}} as parsed by thetvdb_lookup in the [wiki:Plugins/set set] plugin to set {{{content_filename}}} (which the [wiki:Plugins/deluge deluge] plugin uses to rename the main file within a torrent.) The 'default' jinja filter is used to insert 'Unknown' if thetvdb_lookup fails to get an tvdb_ep_name for the entry.
-{{{
-thetvdb_lookup: yes
-set:
-  content_filename: "{{ series_name }} - {{ series_id }} - {{ tvdb_ep_name|default('Unknown') }}  - {{ quality|upper }}"
-}}}
+    thetvdb_lookup: yes
+    set:
+      content_filename: "{{ series_name }} - {{ series_id }} - {{ tvdb_ep_name|default('Unknown') }}  - {{ quality|upper }}"
+
