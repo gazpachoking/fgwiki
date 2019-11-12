@@ -1,3 +1,3 @@
-# removed
+# Commandline Config
 
-Go to [[here|Module[[CommandlineConfig]]]]
+Removed, see [wiki:[[ModuleCliConfig]]].
